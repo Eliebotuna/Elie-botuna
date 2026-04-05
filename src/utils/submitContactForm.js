@@ -1,8 +1,10 @@
 /**
  * Envoie le formulaire de contact sans mailto:
- * 1) REACT_APP_CONTACT_API_URL ou, en dev, /api/contact (proxy → serveur Node + Gmail)
- * 2) REACT_APP_WEB3FORMS_ACCESS_KEY → Web3Forms
- * 3) REACT_APP_CONTACT_FORM_URL → Formspree / Getform
+ * 1) REACT_APP_CONTACT_API_URL (URL absolue du backend)
+ * 2) REACT_APP_VERCEL_MAIL=1 → POST /api/contact (fonction serverless Vercel + Gmail)
+ * 3) dev → /api/contact (proxy → server/index.js)
+ * 4) REACT_APP_WEB3FORMS_ACCESS_KEY → Web3Forms
+ * 5) REACT_APP_CONTACT_FORM_URL → Formspree / Getform
  */
 
 const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
@@ -21,6 +23,7 @@ function resolveContactPostUrl() {
     if (u.endsWith('/api/contact')) return u;
     return `${u}/api/contact`;
   }
+  if (process.env.REACT_APP_VERCEL_MAIL === '1') return '/api/contact';
   if (process.env.NODE_ENV === 'development') return '/api/contact';
   return '';
 }
