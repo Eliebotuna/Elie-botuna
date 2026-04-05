@@ -16,6 +16,13 @@ export class ContactSubmitError extends Error {
   }
 }
 
+/** Hôte Vercel par défaut (*.vercel.app) : l’API serverless est sur le même domaine. */
+function isDefaultVercelHost() {
+  if (typeof window === 'undefined') return false;
+  const h = window.location.hostname;
+  return h === 'vercel.app' || h.endsWith('.vercel.app');
+}
+
 function resolveContactPostUrl() {
   const explicit = process.env.REACT_APP_CONTACT_API_URL?.trim();
   if (explicit) {
@@ -24,6 +31,7 @@ function resolveContactPostUrl() {
     return `${u}/api/contact`;
   }
   if (process.env.REACT_APP_VERCEL_MAIL === '1') return '/api/contact';
+  if (isDefaultVercelHost()) return '/api/contact';
   if (process.env.NODE_ENV === 'development') return '/api/contact';
   return '';
 }

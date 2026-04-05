@@ -24,7 +24,7 @@ export const UI = {
     contactErrorNetwork:
       'Le serveur d’envoi ne répond pas. Lance « npm run dev » (ou « npm run server » en parallèle de « npm start ») et vérifie que le port 5001 est libre.',
     contactNotConfigured:
-      'Contact indisponible : en local, remplis GMAIL_USER et GMAIL_APP_PASSWORD dans .env et lance npm run dev (front + API). En prod, déploie server/index.js et définis REACT_APP_CONTACT_API_URL.',
+      'Contact indisponible : vérifie les variables d’environnement (fichier .env en local, ou import dans l’hébergeur).',
     contactField_name: 'Nom',
     contactField_email: 'E-mail',
     contactField_message: 'Message',
@@ -81,7 +81,7 @@ export const UI = {
     contactErrorNetwork:
       'The mail server is unreachable. Run « npm run dev » (or « npm run server » alongside « npm start ») and ensure port 5001 is free.',
     contactNotConfigured:
-      'Contact unavailable: locally, set GMAIL_USER and GMAIL_APP_PASSWORD in .env and run npm run dev. In production, deploy server/index.js and set REACT_APP_CONTACT_API_URL.',
+      'Contact unavailable: check environment variables (.env locally, or those you imported on your host).',
     contactField_name: 'Name',
     contactField_email: 'Email',
     contactField_message: 'Message',
