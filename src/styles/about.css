@@ -1,0 +1,252 @@
+.about-section {
+  background: transparent;
+  padding: 4rem 0;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.gold-text {
+  color: var(--color-accent);
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-direction: row-reverse;
+}
+
+.about-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.about-text p {
+  color: var(--color-secondary);
+  line-height: 1.8;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.skills h3 {
+  color: var(--color-accent);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  position: relative;
+  padding-left: 25px;
+  color: var(--color-primary);
+}
+
+.skills-list li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+.about-image {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.image-frame {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: visible;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.image-frame::before,
+.image-frame::after {
+  display: none;
+}
+
+.image-frame:hover {
+  transform: translateY(-5px) rotateY(10deg);
+  transition: transform 0.5s ease;
+}
+
+.image-frame:hover::after {
+  opacity: 1;
+}
+
+.image-frame:hover .profile-image {
+  filter: grayscale(0%) contrast(120%);
+}
+
+/* Animations pour les formes */
+@keyframes float {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes colorChange {
+  0% { background: #00ffff; }
+  33% { background: #ff1493; }
+  66% { background: #ffd700; }
+  100% { background: #00ffff; }
+}
+
+/* Formes géométriques avec animations */
+.image-frame .shape {
+  position: absolute;
+  z-index: 3;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.image-frame .shape-1 {
+  width: 80px;
+  height: 8px;
+  background: #00ffff;
+  transform: rotate(-45deg);
+  top: 20%;
+  right: -30px;
+  animation: 
+    float 3s ease-in-out infinite,
+    colorChange 8s ease-in-out infinite;
+}
+
+.image-frame .shape-2 {
+  width: 80px;
+  height: 8px;
+  background: #ff1493;
+  transform: rotate(45deg);
+  bottom: 20%;
+  right: -30px;
+  animation: 
+    float 3s ease-in-out infinite reverse,
+    colorChange 8s ease-in-out infinite 1s;
+}
+
+.image-frame .shape-3 {
+  width: 80px;
+  height: 8px;
+  background: #ffd700;
+  transform: rotate(-45deg);
+  bottom: 40%;
+  left: -30px;
+  animation: 
+    float 4s ease-in-out infinite,
+    colorChange 8s ease-in-out infinite 2s;
+}
+
+.image-frame .shape-4 {
+  width: 25px;
+  height: 25px;
+  background: #00ffff;
+  border-radius: 50%;
+  top: 10%;
+  left: -20px;
+  animation: 
+    pulse 2s ease-in-out infinite,
+    colorChange 8s ease-in-out infinite 3s;
+}
+
+.image-frame .shape-5 {
+  width: 20px;
+  height: 20px;
+  background: #ff1493;
+  border-radius: 50%;
+  bottom: 15%;
+  right: -10px;
+  animation: 
+    pulse 2s ease-in-out infinite 0.5s,
+    colorChange 8s ease-in-out infinite 4s;
+}
+
+.image-frame .shape-6 {
+  width: 30px;
+  height: 30px;
+  background: #ffd700;
+  border-radius: 50%;
+  top: 5%;
+  right: -15px;
+  animation: 
+    pulse 2s ease-in-out infinite 1s,
+    colorChange 8s ease-in-out infinite 5s;
+}
+
+/* Effet de survol sur les formes */
+.image-frame:hover .shape {
+  filter: brightness(1.2);
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .about-image {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 20px;
+  }
+  
+  .skills-list {
+    grid-template-columns: 1fr;
+  }
+
+  .image-frame {
+    width: 280px;
+    height: 280px;
+  }
+}

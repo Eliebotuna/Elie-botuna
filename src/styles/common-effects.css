@@ -1,0 +1,719 @@
+/* Animations pour les particules et étoiles */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-5px) rotate(3deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes colorChange {
+  0% { background: #00ffff; }
+  33% { background: #ff1493; }
+  66% { background: #ffd700; }
+  100% { background: #00ffff; }
+}
+
+/* Styles communs pour les conteneurs d'images */
+.image-container {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: visible;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Exclure les effets pour les sections Services et Stats */
+.services-section .image-container,
+.services-section .service-icon-container,
+.services-section .service-image-container,
+.stats-section .image-container,
+.stats-section .stat-content,
+.stats-section .stat-card,
+.stats-section .stat-card h4,
+.stats-section .stat-card p,
+.stats-section .stat-content h3 {
+  transform: none !important;
+  transform-style: flat !important;
+  perspective: none !important;
+  overflow: visible !important;
+}
+
+.services-section .image-container::before,
+.services-section .image-container::after,
+.services-section .service-icon-container::before,
+.services-section .service-icon-container::after,
+.services-section .service-image-container::before,
+.services-section .service-image-container::after,
+.stats-section .image-container::before,
+.stats-section .image-container::after,
+.stats-section .stat-content::before,
+.stats-section .stat-content::after,
+.stats-section .stat-card::before,
+.stats-section .stat-card h4::before,
+.stats-section .stat-card p::before,
+.stats-section .stat-content h3::after,
+.stats-section .stat-card::after,
+.stats-section .particle::before,
+.stats-section .particle::after,
+.stats-section .star::before,
+.stats-section .star::after,
+.stats-section .shape::before,
+.stats-section .shape::after {
+  display: none !important;
+  background: none !important;
+  animation: none !important;
+}
+
+.services-section .image-container:hover,
+.services-section .service-icon-container:hover,
+.services-section .service-image-container:hover,
+.stats-section .image-container:hover,
+.stats-section .stat-content:hover,
+.stats-section .stat-card:hover,
+.stats-section .stat-card h4:hover,
+.stats-section .stat-card p:hover,
+.stats-section .stat-content h3:hover,
+.stats-section .particle:hover,
+.stats-section .star:hover,
+.stats-section .shape:hover {
+  transform: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+.services-section .image-container:hover::after,
+.services-section .service-icon-container:hover::after,
+.services-section .service-image-container:hover::after,
+.stats-section .image-container:hover::after,
+.stats-section .stat-content:hover::after,
+.stats-section .stat-card:hover::before,
+.stats-section .stat-card h4:hover::before,
+.stats-section .stat-card p:hover::before,
+.stats-section .stat-content h3:hover::after,
+.stats-section .stat-card:hover::after,
+.stats-section .particle:hover::after,
+.stats-section .star:hover::after,
+.stats-section .shape:hover::after {
+  opacity: 0 !important;
+  background: none !important;
+  animation: none !important;
+}
+
+.services-section .image-container:hover img,
+.services-section .service-icon-container:hover img,
+.services-section .service-image-container:hover img,
+.stats-section .image-container:hover img,
+.stats-section .stat-content:hover img {
+  filter: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Supprimer toutes les animations sur les stats */
+.stats-section * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.stats-section .particle,
+.stats-section .star,
+.stats-section .shape {
+  display: none !important;
+}
+
+.stats-section .stat-card,
+.stats-section .stat-content,
+.stats-section .stat-content h3,
+.stats-section .stat-card h4,
+.stats-section .stat-card p {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.image-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Style spécifique pour les services */
+.service-icon-container.image-container {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+/* Style spécifique pour les stats */
+.stat-content.image-container {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+/* Style spécifique pour le bouton AI */
+.ai-assistant-toggle.image-container {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+/* Particules orbitales */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  animation-delay: 2s;
+}
+
+.particle:nth-child(3) {
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 4s;
+}
+
+.particle:nth-child(4) {
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  animation-delay: 6s;
+}
+
+/* Étoiles scintillantes */
+.star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  pointer-events: none;
+  opacity: 0.6;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.star:nth-child(5) {
+  top: 10%;
+  right: 10%;
+  animation-delay: 0.5s;
+}
+
+.star:nth-child(6) {
+  top: 20%;
+  left: 15%;
+  animation-delay: 1s;
+}
+
+.star:nth-child(7) {
+  bottom: 15%;
+  right: 20%;
+  animation-delay: 1.5s;
+}
+
+.star:nth-child(8) {
+  bottom: 25%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+/* Formes géométriques */
+.shape {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, var(--color-accent), var(--accent-blue));
+  opacity: 0.1;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphing 10s ease-in-out infinite;
+}
+
+.shape:nth-child(1) {
+  top: -50px;
+  left: -50px;
+  animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+  bottom: -50px;
+  right: -50px;
+  animation-delay: -2s;
+}
+
+.shape:nth-child(3) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -4s;
+}
+
+/* Animation au survol */
+.image-frame:hover .profile-image {
+  transform: scale(1.05);
+}
+
+/* Effet de profondeur 3D */
+.image-frame::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--color-accent), var(--accent-blue));
+  opacity: 0.2;
+  z-index: -1;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Effet de survol */
+.image-container:hover {
+  transform: translateY(-5px) rotateY(10deg);
+  transition: transform 0.5s ease;
+}
+
+.image-container:hover::after {
+  opacity: 1;
+}
+
+.image-container:hover img {
+  filter: grayscale(0%) contrast(120%);
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: filter 0.3s ease;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Effets pour les formes géométriques */
+.shape:nth-child(4) {
+  width: 15px;
+  height: 15px;
+  background: #00ffff;
+  border-radius: 50%;
+  top: 10%;
+  left: -10px;
+  animation: pulse 2s ease-in-out infinite, colorChange 8s ease-in-out infinite 3s;
+}
+
+.shape:nth-child(5) {
+  width: 12px;
+  height: 12px;
+  background: #ff1493;
+  border-radius: 50%;
+  bottom: 15%;
+  right: -5px;
+  animation: pulse 2s ease-in-out infinite 0.5s, colorChange 8s ease-in-out infinite 4s;
+}
+
+.shape:nth-child(6) {
+  width: 18px;
+  height: 18px;
+  background: #ffd700;
+  border-radius: 50%;
+  top: 5%;
+  right: -8px;
+  animation: pulse 2s ease-in-out infinite 1s, colorChange 8s ease-in-out infinite 5s;
+}
+
+@keyframes morphing {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  25% {
+    border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+  }
+  50% {
+    border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+  }
+  75% {
+    border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Effet de survol sur les cartes stats */
+.stats-section .stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-section .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Effet de survol sur les nombres */
+.stats-section .stat-content h3 {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.stats-section .stat-content h3:hover {
+  transform: scale(1.1);
+  color: var(--color-accent);
+}
+
+/* Effet de survol sur les titres */
+.stats-section .stat-card h4 {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.stats-section .stat-card h4:hover {
+  transform: translateX(5px);
+  color: var(--color-accent);
+}
+
+/* Effet de survol sur le texte */
+.stats-section .stat-card p {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.stats-section .stat-card p:hover {
+  transform: translateX(5px);
+  color: #FFF;
+}
+
+/* Effet de brillance sur les cartes */
+.stats-section .stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.05),
+    transparent
+  );
+  transition: 0.8s;
+  z-index: 1;
+  opacity: 0;
+}
+
+.stats-section .stat-card:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Effet de brillance sur les nombres */
+.stats-section .stat-content h3::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.1),
+    transparent
+  );
+  transition: 0.6s;
+  z-index: 1;
+  opacity: 0;
+}
+
+.stats-section .stat-content h3:hover::after {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Effet de brillance sur les titres */
+.stats-section .stat-card h4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.05),
+    transparent
+  );
+  transition: 0.6s;
+  z-index: 1;
+  opacity: 0;
+}
+
+.stats-section .stat-card h4:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Effet de brillance sur le texte */
+.stats-section .stat-card p::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  transition: 0.6s;
+  z-index: 1;
+  opacity: 0;
+}
+
+.stats-section .stat-card p:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Effet de défilement fluide */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Animation de défilement personnalisée */
+.section-transition {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet de transition pour les sections */
+.hero-section,
+.about-section,
+.services-section,
+.stats-section {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.hero-section.visible,
+.about-section.visible,
+.services-section.visible,
+.stats-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Effet de transition pour les cartes */
+.service-card,
+.stat-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.service-card.visible,
+.stat-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Supprimer les règles qui masquent les éléments */
+.services-section *,
+.stats-section * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.services-section .particle,
+.services-section .star,
+.services-section .shape,
+.stats-section .particle,
+.stats-section .star,
+.stats-section .shape {
+  display: none !important;
+}
+
+/* Restaurer la visibilité des éléments de contenu */
+.services-section .service-card,
+.services-section .service-icon-container,
+.services-section .service-icon,
+.services-section h3,
+.services-section p,
+.stats-section .stat-card,
+.stats-section .stat-content,
+.stats-section h3,
+.stats-section h4,
+.stats-section p {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Délai d'animation pour les cartes */
+.service-card:nth-child(1) { transition-delay: 0.1s; }
+.service-card:nth-child(2) { transition-delay: 0.2s; }
+.service-card:nth-child(3) { transition-delay: 0.3s; }
+.service-card:nth-child(4) { transition-delay: 0.4s; }
+.service-card:nth-child(5) { transition-delay: 0.5s; }
+.service-card:nth-child(6) { transition-delay: 0.6s; }
+
+.stat-card:nth-child(1) { transition-delay: 0.1s; }
+.stat-card:nth-child(2) { transition-delay: 0.2s; }
+.stat-card:nth-child(3) { transition-delay: 0.3s; }
+.stat-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Restaurer le fond noir pour la section Stats */
+.stats-section {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.stats-section .stat-card {
+  background-color: #000000 !important;
+  border: 1px solid rgba(255, 215, 0, 0.1) !important;
+}
+
+.stats-section .stat-content {
+  background-color: transparent !important;
+}
+
+.stats-section .stat-content h3 {
+  color: var(--color-accent) !important;
+}
+
+.stats-section .stat-card h4 {
+  color: #ffffff !important;
+}
+
+.stats-section .stat-card p {
+  color: #ffffff !important;
+}
+
+/* Supprimer les effets de survol sur les stats */
+.stats-section .stat-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.stats-section .stat-content h3:hover,
+.stats-section .stat-card h4:hover,
+.stats-section .stat-card p:hover {
+  transform: none !important;
+  color: inherit !important;
+}
+
+/* Supprimer les effets de brillance */
+.stats-section .stat-card::before,
+.stats-section .stat-content h3::after,
+.stats-section .stat-card h4::before,
+.stats-section .stat-card p::before {
+  display: none !important;
+} 
