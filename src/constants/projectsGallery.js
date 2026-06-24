@@ -100,4 +100,15 @@ export const projectsGallery = [
     sourceUrl: '',
     demoUrl: 'https://bagalexpressnetoyage.com/',
   },
+  {
+    id: 10,
+    title: 'Covina',
+    category: 'Plateforme de securite',
+    image: p('covina.png'),
+    description:
+      'Plateforme de securite, alertes et innovation en RDC.',
+    technologies: ['Web', 'Securite', 'Alertes'],
+    sourceUrl: '',
+    demoUrl: 'https://www.covinardc.com/fr',
+  },
 ];

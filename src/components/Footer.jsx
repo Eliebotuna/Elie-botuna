@@ -55,7 +55,7 @@ const Footer = ({ socialLinks, email }) => {
             </a>
           ))}
         </div>
-        <p className="footer-min-copy">&copy; {new Date().getFullYear()} Portfolio</p>
+        <p className="footer-min-copy">&copy; {new Date().getFullYear()} Elie Botuna</p>
       </div>
     </footer>
   );
